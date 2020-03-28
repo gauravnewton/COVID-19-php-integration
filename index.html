@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>COVID-19 | Dashboard</title>
+  <link rel="shortcut icon" href="dist/img/icon.png">
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <style>
+      .data-text{
+          padding-left:15px;
+      }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+     
+    </ul>
+
+    <!-- SEARCH FORM -->
+    <form class="form-inline ml-3">
+      <div class="input-group input-group-sm">
+        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        <div class="input-group-append">
+          <button class="btn btn-navbar" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+     
+      
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+        <p>
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <span class="brand-text font-weight-light">Global Stats</span>
+        </p>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+          
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">       
+          <li class="nav-header user-panel mt-3 pb-3 mb-3 d-flex"><h1>Cases</h1></li>
+          <li class="nav-header "><p id="cases">Loading data...</p></li>
+          
+          <li class="nav-header user-panel mt-3 pb-3 mb-3 d-flex"><h1>Deaths</h1></li>
+          <li class="nav-header"><p id="deaths">Loading data...</p></li>
+                    
+          <li class="nav-header user-panel mt-3 pb-3 mb-3 d-flex"><h1>Recovered</h1></li>
+          <li class="nav-header"><p id="recovers">Loading data...</p></li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">COVID-19 Stats</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">Data Source</li>
+              <li class="breadcrumb-item active"> <a target="_blank" href="https://gisanddata.maps.arcgis.com/apps/opsdashboard/index.html#/bda7594740fd40299423467b48e9ecf6">JHU CSSE GISand Data ( Tracking since 21 Jan 2020 )</a></li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+       
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+          <!-- Left col -->
+          <section class="col-lg-7 connectedSortable">
+              
+              <!-- Custom table-->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="fas fa-chart mr-1"></i>
+                  Sales
+                </h3>
+                <div class="card-tools">
+                  <button type="button" class="btn bg-info btn-sm" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn bg-danger btn-sm" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                  <table class="table table-striped table-hover table-condensed" id="all-data">
+                      <thead>
+                            <tr class="text-center">                                
+                                <th id="heading">
+                                    
+                                </th>
+
+                            </tr>
+                        </thead>
+                  </table>
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->  
+
+          </section>
+          <!-- /.Left col -->
+          <!-- right col (We are only adding the ID to make the widgets sortable)-->
+          <section class="col-lg-5 connectedSortable">
+
+            <!-- AREA CHART -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Area Chart</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+
+           
+          </section>
+          <!-- right col -->
+        </div>
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>API credits <a href="https://github.com/NovelCOVID/API" target="_blank">NovelCOVID</a>.</strong>
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Source Code at </b> <a href="" target="_blank"><i class="fab fa-github"></i></a>
+
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- ChartJS -->
+<script src="plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
+<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+<!-- jQuery Knob Chart -->
+<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.js"></script>
+<script src="plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+<script>
+    $(document).ready(function () {
+        globalData();
+        allData();
+        chartData('china');
+        
+        
+     });
+     
+     var allData = function(){
+            $.ajax({
+             url: 'https://coronavirus-19-api.herokuapp.com/countries',
+             dataType: 'json',
+             type: 'GET',
+             contentType: 'application/json',
+             cache: false,
+             success : function(data){
+                 renderDataTable(data);
+                 $('#heading').removeClass('sorting_asc');
+             },
+             error : function(data,textStatus,errorMessage){
+                 alert( "Didn't reach to API");
+             }
+         }); 
+     }  
+     
+     var globalData = function(){
+            $.ajax({
+             url: 'https://coronavirus-19-api.herokuapp.com/all',
+             dataType: 'json',
+             type: 'GET',
+             contentType: 'application/json',
+             cache: false,
+             success : function(data){
+                 $('#cases').html("<h2 class='data-text'>"+numberFormatter(data.cases)+"</h2>");
+                 $('#deaths').html("<h2 class='data-text'>"+numberFormatter(data.deaths)+"</h2>");
+                 $('#recovers').html("<h2 class='data-text'>"+numberFormatter(data.recovered)+"</h2>");
+                 
+
+             },
+             error : function(data,textStatus,errorMessage){
+                 alert( "Didn't reach to API");
+             }
+         });  
+     };
+     
+     
+     var numberFormatter = function(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+     }
+     
+     
+     
+     
+    var renderDataTable = function(data){
+        allDataTable = $("#all-data").dataTable({
+            "lengthMenu": [[2,10, 25, 50, -1], [2,10, 25, 50, "All"]],
+            "pageLength":2,
+            "aaData" : data,
+            "autoWidth": false,        
+            "scrollX": true,
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "aaSorting": [],
+            "info": true,
+            "oLanguage" : {
+                "sInfoEmpty" : "No entries to show"
+            },
+            "sortable": true,
+            "aoColumns" : [
+                {
+                    mData : null
+                }
+            ],
+            "aoColumnDefs" : [
+                {
+                    "aTargets" : [0],
+                    "orderable": false,
+                    "mRender" : function(data,type,bomModel){
+                            var classToinclude;
+                            if(data.todayCases > 0 ){
+                                classToinclude = "callout-danger";
+                            }else{
+                                classToinclude = "callout-info";
+                            }
+                        return `<div class="col-md-12 country" id="`+ data.country+`" onClick= "chartData('`+ data.country+`')">
+                                    <div class="callout `+ classToinclude +`">
+                                        <h5>`+data.country+`</h5>
+                                        <p>Cases : `+ numberFormatter(data.cases) +` | Today : `+ numberFormatter(data.todayCases) +` | Active : `+ numberFormatter(data.active) +` </p>
+                                        <p>Deaths : `+ numberFormatter(data.deaths) +` | Today : `+ numberFormatter(data.todayDeaths) +`</p>
+                                        <p>Recovered : `+ numberFormatter(data.recovered) +` | Critical : `+ numberFormatter(data.critical) +`</p>
+                                    </div>
+                                </div>`;
+
+                    }
+                }]
+        });
+    };
+    
+    
+    
+    var chartData = function(countryName){debugger
+            $.ajax({
+             url: 'https://corona.lmao.ninja/v2/historical/'+countryName,
+             dataType: 'json',
+             type: 'GET',
+             contentType: 'application/json',
+             cache: false,
+             success : function(data){
+                        debugger
+                        var janCase = 0;
+                        var febCase = 0;
+                        var marCase = 0;
+                        var aprCase = 0;
+                        var mayCase = 0;
+                        var junCase = 0;
+                        var julCase = 0;
+                        
+                        var janDeath = 0;
+                        var febDeath = 0;
+                        var marDeath = 0;
+                        var aprDeath = 0;
+                        var mayDeath = 0;
+                        var junDeath = 0;
+                        var julDeath = 0;
+                        
+                        if( !$.isEmptyObject(data.timeline.cases) ){debugger
+                            $.each(data.timeline.cases, function( value, index ) {
+                                if( value >= '1/1/20' && value <= '1/31/20' )
+                                    janCase = index ;
+                                if( value >= '2/1/20' && value <= '2/29/20' )
+                                    febCase = index ;
+                                if( value >= '3/1/20' && value <= '3/31/20' )
+                                    marCase = index ;
+                                if( value >= '4/1/20' && value <= '4/30/20' )
+                                    aprCase = index ;
+                                if( value >= '5/1/20' && value <= '5/31/20' )
+                                    mayCase = index ;
+                                if( value >= '6/1/20' && value <= '6/30/20' )
+                                    junCase = index ;
+                                if( value >= '7/1/20' && value<= '7/31/20' )
+                                    julCase = index ;
+                            });
+                        }
+                        
+                        
+                        if( !$.isEmptyObject(data.timeline.deaths) ){debugger
+                            $.each(data.timeline.deaths, function( value, index ) {
+                                if( value >= '1/1/20' && value <= '1/31/20' )
+                                    janDeath = index ;
+                                if( value >= '2/1/20' && value <= '2/29/20' )
+                                    febDeath = index ;
+                                if( value >= '3/1/20' && value <= '3/31/20' )
+                                    marDeath = index ;
+                                if( value >= '4/1/20' && value <= '4/30/20' )
+                                    aprDeath = index ;
+                                if( value >= '5/1/20' && value <= '5/31/20' )
+                                    mayDeath = index ;
+                                if( value >= '6/1/20' && value <= '6/30/20' )
+                                    junDeath = index ;
+                                if( value >= '7/1/20' && value<= '7/31/20' )
+                                    julDeath = index ;
+                            });
+                        }
+                        
+                        
+                        
+                        // Get context with jQuery - using jQuery's .get() method.
+                        var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
+                        
+                        var areaChartData = {
+                            labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                            datasets: [
+                              {
+                                label               : 'Cases',
+                                backgroundColor     : 'rgba(60,141,188,0.9)',
+                                borderColor         : 'rgba(60,141,188,0.8)',
+                                pointRadius          : false,
+                                pointColor          : '#3b8bba',
+                                pointStrokeColor    : 'rgba(60,141,188,1)',
+                                pointHighlightFill  : '#fff',
+                                pointHighlightStroke: 'rgba(60,141,188,1)',
+                                data                : [janCase, febCase, marCase, aprCase, mayCase, junCase, julCase]
+                              },
+                              {
+                                label               : 'Deaths',
+                                backgroundColor     : 'rgba(210, 214, 222, 1)',
+                                borderColor         : 'rgba(210, 214, 222, 1)',
+                                pointRadius         : false,
+                                pointColor          : 'rgba(210, 214, 222, 1)',
+                                pointStrokeColor    : '#c1c7d1',
+                                pointHighlightFill  : '#fff',
+                                pointHighlightStroke: 'rgba(220,220,220,1)',
+                                data                : [janDeath, febDeath, marDeath, aprDeath, mayDeath, junDeath, julDeath]
+                              },
+                            ]
+                          }
+                          
+                          var areaChartOptions = {
+                            maintainAspectRatio : false,
+                            responsive : true,
+                            legend: {
+                              display: false
+                            },
+                            scales: {
+                              xAxes: [{
+                                gridLines : {
+                                  display : false,
+                                }
+                              }],
+                              yAxes: [{
+                                gridLines : {
+                                  display : false,
+                                }
+                              }]
+                            }
+                          }
+
+                          // This will get the first returned node in the jQuery collection.
+                          var areaChart       = new Chart(areaChartCanvas, { 
+                            type: 'line',
+                            data: areaChartData, 
+                            options: areaChartOptions
+                          })
+                          
+
+             },
+             error : function(data,textStatus,errorMessage){
+                 alert( "Didn't reach to API");
+             }
+         });  
+     };
+    
+    
+    
+
+</script>
+</body>
+</html>
